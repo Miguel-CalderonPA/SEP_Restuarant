@@ -1,0 +1,82 @@
+$variable: #005DFF;//value
+
+$colors:(
+    bun:#A88E79,
+    cheese:#D6A93B,
+    tomato:#D73232,
+    lettuce:#C8F292,
+    bg:#fedd8e
+
+
+);
+$variables: (
+    primary: #005dff,
+    accent:#FFFFFF
+);
+body {
+    background-color:map-get($colors, bg );
+    justify-content:center;
+    #bun{
+        clip-path: polygon(50% 80%, 72% 78%, 75% 72%, 75% 90%, 25% 90%, 25% 72%, 28% 78%);
+        background-color: map-get($colors, bun );
+        width:100%;
+        height:100%;
+        position:fixed;
+        margin-left:auto;
+        margin-right: auto;
+    }
+    
+    #cheese{
+        clip-path: polygon(50% 90%, 39% 71%, 58% 71%);
+        background-color: map-get($colors, cheese);
+        width:100%;
+        height:100%;
+        position:fixed;
+
+        margin-left:auto;
+        margin-right: auto;
+    }
+    
+    #tomato{
+        clip-path: polygon(50% 84%, 72% 78%, 75% 72%, 75% 68%, 25% 68%, 25% 72%, 28% 78%);
+        background-color: map-get($colors, tomato);
+        width:100%;
+        height:100%;
+        position:fixed;
+        z-index: -1;
+        margin-left:auto;
+        margin-right: auto;
+    }
+    #lettuce{
+        clip-path: polygon(50% 72%, 72% 70%, 75% 68%, 75% 64%, 25% 64%, 25% 68%, 28% 70%);
+        background-color: map-get($colors, lettuce);
+        width:100%;
+        height:100%;
+        position:fixed;
+        z-index: -1;
+        margin-left:auto;
+        margin-right: auto;
+    }
+    #top_bun{
+        clip-path: polygon(55% 18%, 71% 19%, 75% 23%, 75% 28%, 25% 64%, 28% 48%, 38% 29%);
+        background-color: map-get($colors, bun );
+        width:100%;
+        height:100%;
+        position:fixed;
+        margin-left:auto;
+        margin-right: auto;
+        transition: clip-path 2s;
+        z-index: 2;
+    }
+    
+    #top_bun:hover{
+        clip-path: polygon(55% 48%, 71% 55%, 75% 59%, 75% 64%, 25% 64%, 28% 58%, 38% 48%);
+    }
+    #fruip
+    {
+        position:absolute;
+        right:35%;
+        bottom:40%;
+        z-index:1;
+    }
+}
