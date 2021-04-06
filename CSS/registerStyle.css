@@ -1,0 +1,93 @@
+body{  
+    font-family: Calibri, Helvetica, sans-serif;  
+    background-color: #fd5e53; 
+    text-align: center; 
+    color: white;
+}  
+img#one {
+	float:left;
+	width: 15%
+}
+img#two{
+	float:right;
+	width: 15%;
+}
+.container {  
+    padding: 100px;  
+    background: url(../Images/resturant2.jpg) fixed center;  
+}  
+label {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+    }
+a {
+	font-size:12px;
+	background-color:#fd5e53;
+	border: 2px solid #000000;
+	padding:10px;
+}
+input[type=email], textarea {
+	 width: 20%;
+    padding: 15px;  
+    margin: 5px 0 22px 0;  
+    <!--display: inline-block;-->
+    border: none;  
+    background: #f1f1f1;  
+    text-align: center;
+}  
+	
+input[type=text], input[type=password], input[type=email], textarea {  
+    width: 20%;
+    padding: 15px;  
+    margin: 5px 0 22px 0;  
+    <!--display: inline-block;-->
+    border: none;  
+    background: #f1f1f1;  
+    text-align: center;
+}  
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {  
+    outline: none;  
+	width 25%;
+}  
+
+.lbls {  
+    padding: 10px 160px 10px 0;  
+	margin: auto;
+	background-color:#000000;opacity:0.8;
+	width: 50%;
+}
+.msgBox {  
+    padding: 10px; 
+	margin: auto;
+	background-color:#000000;opacity:0.8;
+	width: 50%;
+}  
+.title {  
+    padding: 10px;  
+	margin: auto;
+	background-color:#000000;opacity:0.8;
+	width: 50%;
+}  
+
+hr {  
+    border: 1px solid #f1f1f1;  
+    margin-bottom: 25px;  
+}  
+
+.registerbtn {  
+    background-color: red;
+    color: white;  
+    padding: 15px;   
+    margin: 5px 0 22px 0;
+    border: none;  
+    cursor: pointer;  
+    width: 100%;  
+    opacity: 0.9; 
+	width: 10%
+}  
+  
+.registerbtn:hover {  
+    opacity: 1;  
+} 

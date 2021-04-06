@@ -1,0 +1,83 @@
+
+body 
+{
+	background-image: url(../Images/resturant2.jpg);
+	background-size:cover;
+	background-postion:fliph;
+	font-size:20px;
+	font-weight:bold;		<!--backgr (look up transforming background image)-->
+	color:#66ff33;
+
+	}
+	img#one
+	{
+	float:left;
+	}
+	img#two
+	{
+	float:right;
+	}
+
+	h1,h6
+	{
+	color:#33cc33;
+	}
+
+	table
+	{
+	text-align:center;
+	color:#000000;
+	background-color:#fd5e53; <!--opacity:1.5-;-->
+	}
+
+	ol,ul
+	{
+	color:#33cc33;
+	}
+
+	.header
+	{
+	text-align:center;
+	background-color:#000000;opacity:0.8;
+	font-size:25px;
+	padding:1px;
+	}
+	.lab
+	{
+	text-align:center;
+	background-color:#000000;opacity:0.9;
+	padding:10px;
+	}
+
+	.hobbies
+	{
+	text-align:center;color:#33cc33;
+	background-color:#000000;opacity:0.8;
+	padding:10px;
+	}
+
+	.contact
+	{
+	text-align:center;color:#33cc33;
+	background-color:#000000;opacity:0.8;
+	padding:10px;
+	
+	}
+
+	a
+	{
+	font-size:18px;
+	background-color:#fd5e53;
+	border: 2px dashed #000000;
+	padding:10px;
+	}
+
+	blockquote
+	{
+	float:left;
+	color:#33cc33;
+	background-color:#000000;opacity:0.8;
+	}
+	
+	
+	

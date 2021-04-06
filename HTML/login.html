@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+<script src="jquery-1.11.1.js"></script>
+<script>
+        $(document).ready(function(){
+
+                $("#login").on("click",function() {
+                        $.post("../PHP/login.php", {useName:$("#useName").val(),pwd:$("#pwd").val()},
+                                function(result){ $("#popup").html(result);
+                                });
+                });
+        });
+
+
+
+
+</script>
+
+        <title>Login page</title>
+        <link rel="stylesheet" href= "../CSS/style.css" type = "text/css">
+    </head>
+    <body>
+<div id="popup" name="popup"></div>
+        <div class = "loginbox">
+            <img src = "../Images/ChomperLogo.jpg" class = "avatar">
+            <h1>Welcome to (*<)homper</h1>
+            <form>
+                <p>Username</p>
+                <input type="text" id="useName"  name="useName" placeholder="Enter Username">
+                <p>Password</p>
+                <input type="text" id="pwd"  name="pwd" placeholder="Enter Password">
+                <input type="button" id="login" name="login"  value="Login">
+		<!-- note, don't change css to accomidate submit, may alter back for jquery -->
+                <a href = "register.html">Create an account</a><br>
+                <a href = "forgotPassword.html">Forgot Password?</a><br>
+                                <a href = "helpTicket.html">Contact Us</a>
+            <form>
+
+    </body>
+    </html>
+
