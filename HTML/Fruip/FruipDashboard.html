@@ -2,33 +2,74 @@
 <html>
 <head>
 <title> Dashboard </title>
-<link rel="stylesheet" href= "../../CSS/dashboard.css" type = "text/css"> 
-<style>
+<link rel="stylesheet" href= "../../CSS/dashboard.css" type = "text/css">
+<script src="../jquery-1.11.1.js"></script>
+<script>
+        $(document).ready(function(){
+                $(window).load(function() {
+                        $.post("../../PHP/loadfruips.php", function(result){
+                                $("#fruipTable").html(result);
+                        });
+                });
+                $("#joinBtn").on("click",function() {
+                        $.post("../../PHP/joinfruip.php", {fruipName:$("#joinFruip").val()},
+                                function(result){ $("#popup").html(result);
+                                });
+                });
+        });
+</script>
 
+<style>
+#sidebar{
+	width: 250px;
+	height: 100%;
+	background: #ffdb58;
+	float: left;
+}
 
 </style>
 </head>
 <body>
-	<div id = "header">
-		<center><img src="../../Images/ChomperLogo.jpg" alt = "ChomperLogo" id="ChomperLogo"><br><h1>Fruip Dashboard</h1> </center>
-	
-	</div>
-	<div id = "sidebar">
-	<ul>
-		<a href="http://ec2-52-14-132-218.us-east-2.compute.amazonaws.com/efs-mount-point/sampledir/HTML/Fruip/FruipCreation.html"><li> Add Fruip	</li></a>
-		<a href="http://ec2-52-14-132-218.us-east-2.compute.amazonaws.com/efs-mount-point/sampledir/HTML/Fruip/FruipDeletion.html"><li> Delete Fruip	</li></a>
-		<li> Browse Fruips	</li>
-		<a href="http://ec2-52-14-132-218.us-east-2.compute.amazonaws.com/efs-mount-point/sampledir/HTML/login.html"><li> Logout </li></a>
-	</ul>
-	
-	
-	</div>
-	<div id = "data">
-		<center><h3> Fruips </h3>
-			<p> All your Fruips will be displayed here! </center>
-	
-	
-	</div>
+        <div id = "header">
+                <center><img src="../../Images/ChomperLogo.jpg" alt = "ChomperLogo" id="ChomperLogo"><br><h1>Fruip Dashboard</h1> </center>
+	<div id="popup"></div>
+        </div>
+        <div id = "sidebar">
+        <ul>
+                <a href="FruipCreation.html"><li> Add </li> </a>
+                <a href="FruipDeletion.html"><li> Del </li> </a>
+                <a href=#> <li> Browse Fruips </li> </a>
+                <a href="../login.html"><li> Logout </li></a>
+                <li>
+                <input type="text" name="joinFruip" id="joinFruip" placeholder="Please enter a fruip name">
+                <button type="button" name="joinBtn" id="joinBtn">Send Join Request</button>
+                </li>
+                
+        </ul>
+
+
+        </div>
+        <div id = "data">
+                <center><h3> Fruips </h3>
+                        <p> All your Fruips will be displayed here! </center>
+                <center>
+                        <table border='2'>
+                                <thead>
+                                        <tr>
+                                                <th>Fruip</th>
+                                                <th>Currently Voting?</th>
+                                                <th>Voting status</th>
+                                                <th>Results</th>
+                                                <th>Manage</th>
+                                        </tr>
+                                </thead>
+                                <tbody id="fruipTable" name="fruipTable"></tbody>
+
+                        </table>
+
+
+        </div>
 
 </body>
 </html>
+

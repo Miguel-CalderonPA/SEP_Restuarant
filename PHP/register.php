@@ -54,6 +54,7 @@
 		
 		try{
 			$stmt ->execute();
+			 echo "<script>alert('Regisration Successful');</script>";
 		}catch(PDOException $e){
 			if($e->getCode()==23505){
 				if(strpos($e->getMessage(),"email")!==false)

@@ -2,18 +2,32 @@
 <html>
 <head>
 <title>Fruip Creation</title>
+
+<script src="../jquery-1.11.1.js"></script>
+<script>
+        $(document).ready(function(){
+
+                $("#register").on("click",function() {
+                        $.post("../../PHP/createfruip.php", {fruipName:$("#fruipName").val()},
+                                function(result){ $("#popup").html(result);
+                                });
+                });
+        });
+</script>
+
 </head>
 <body>
 <img id ="one" src="../../Images/ChomperLogo.jpg" alt="picture of ChomperLogo">
 <img id ="two" src="../../Images/ChomperLogo.jpg" alt="picture of ChomperLogo">
-<form action="../PHP/blank.php" method="POST">
+<div name="popup" id="popup"></div>
+<form>
   <div class="container">
 <link rel="stylesheet" href= "../../CSS/registerStyle.css" type = "text/css">
   <div class = "title"><h1> Fruip Registeration Form</h1></div>
   <hr>
         <div class="lbls"><label><b>Fruip Name </b></label>   
-        <input type="text" id="useName" name="FruipName" placeholder="Enter Unique Fruip name" size="15" required=""></div>   
-		<button type="submit" class="registerbtn">Register</button>
+        <input type="text" id="fruipName" name="fruipName" placeholder="Enter Unique Fruip name" size="15" required=""></div>   
+		<button type="button"  id="register" name="register"  class="registerbtn">Register</button>
 </form>
 <br><a href="http://ec2-52-14-132-218.us-east-2.compute.amazonaws.com/efs-mount-point/sampledir/HTML/Fruip/FruipDashboard.html"> Back to Fruip Dashboard </a>
 </body>

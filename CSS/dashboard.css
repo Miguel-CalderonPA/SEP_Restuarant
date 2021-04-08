@@ -1,0 +1,41 @@
+body {
+	margin: 0px;
+	border: 0px;
+	background: url(../Images/resturant2.jpg) fixed center;  
+	font-family: sans-serif;
+}
+ul li {
+	padding: 20px;
+	border-bottom: 2px solid grey;
+}
+ul li:hover{
+	background: #fd5e53;
+	color: white;
+}
+#ChomperLogo{
+	border-radius: 50px;
+	width:6%;
+	Float: left;
+	padding: 5px;
+}
+ul li:hover{
+	background: #fd5e53;
+	color: white;
+}
+#header{
+	width: 100%;
+	height: 120px;
+	background: #c68958;
+	color: #000000;
+}
+#sidebar{
+	width: 225px;
+	height: 100%;
+	background: #ffdb58;
+	float: left;
+}
+#data {
+	height: 800px;
+	background: #fd5e53;
+	color: #000000;
+}

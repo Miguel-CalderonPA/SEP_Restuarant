@@ -1,4 +1,4 @@
- <?php
+<?php
 
                 //error_reporting(-1);
                 //ini_set("display error",1);
@@ -17,23 +17,29 @@
                 print"Error!: ".$e->getMessage()."<br/>";
                 die();
                 }
-		$pass=$myPDO->query("SELECT salt,hash FROM users WHERE usename='{$useName}'")->fetch();
-		if(empty($pass['salt']))
-		{
-			
+                $pass=$myPDO->query("SELECT salt,hash FROM users WHERE usename='{$useName}'")->fetch();
+                if(empty($pass['salt']))
+                {
 
-		}
+
+                }
 
                 $hashedPass=crypt($pwd, $pass['salt']);
-               // $pass= $myPDO->query("SELECT case when (SELECT hash from users where usename='{$useName}')='{$hashedPass}' then 1 else 0");
-		if($pass['hash']==$hashedPass){
-			echo "<script>alert('login successful');</script>";
-			//header("Location: ../HTML/Fruip/FruipDashboard.html");
-			echo ("<script>location.href='../HTML/Fruip/FruipDashboard.html';</script>"); 
-		}
-		else
-		{
-			echo "<script>alert('login failed: username or password is invalid');</script>";
-		}
+               // $pass= $myPDO->query("SELECT case when (SELECT hash from users where usename='{$useName}')='{$hash$
+                if($pass['hash']==$hashedPass){
+                        echo "<script>alert('login successful');</script>";
+                        //header("Location: ../HTML/Fruip/FruipDashboard.html");
+                        session_start();
+			$_SESSION['useName']=$useName;
+			$_SESSION['created']=time();
+			$_SESSION['refresh']=time();
+			echo ("<script>location.href='../HTML/Fruip/FruipDashboard.html';</script>");
+                }
+                else
+                {
+                        echo "<script>alert('login failed: username or password is invalid');</script>";
+                }
 
 ?>
+
+

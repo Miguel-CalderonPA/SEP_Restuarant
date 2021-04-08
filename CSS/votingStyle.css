@@ -1,0 +1,89 @@
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 40px;
+    left: calc(50% - 50px);
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    padding-top: 160px;
+}
+
+body{  
+    font-family: Calibri, Helvetica, sans-serif;  
+    background: url(../Images/resturant2.jpg);
+    background-position: center;
+    text-align: center; 
+    color: white;
+}  
+
+.container {
+    height: 100px;
+    width: 300px;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px -6px black;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  
+  .container>div {
+    text-align: center;
+  }
+  
+  .container>div:hover {
+    cursor: pointer;
+  }
+  
+  .left {
+    background: red;
+  }
+  .title {  
+    padding: 10px;  
+	margin: auto;
+	background-color:#000000;opacity:0.8;
+	width: 50%;
+	height: 300px;
+}  
+.lbls {  
+    padding: 10px 160px 10px 0;  
+	margin-top: 300px;
+	width: 50%;
+	height: 1000px;
+}
+a {
+	font-size:12px;
+	background-color:#fd5e53;
+	border: 2px solid #000000;
+	padding:10px;
+}
+  .right {
+    background: yellow;
+    color: black;
+  }
+  
+  .text {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+  }
+  
+  .option-title {
+    color: black;
+  }
+  
+  .option-size {
+    color:black;
+    font-size: 30px;
+  }

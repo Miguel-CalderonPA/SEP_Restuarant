@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<head>
+    <title>(<*)homper Voting</title>
+    <link rel="stylesheet" href= "../../CSS/votingStyle.css" type = "text/css"> 
+</head>
+
+<body>
+    <div class = "title"><img src = "../../Images/ChomperLogo.jpg" class = "avatar">
+	<h1>(*<)homper Voting Poll</h1> 
+    <p>Vote for your favorite resturant!</p> </div>
+
+    <div class="container" id="voting-box">
+    <div class="left" onclick="addleft()">
+      <div class="text">
+        <span class="option-size" id="size-one"></span>
+        <br>
+        <span class="option-title" id="option-one"></span>                
+      </div>
+    </div>
+    <div class="right" onclick="addright()">
+      <div class="text">
+        <span class="option-size" id="size-two"></span>
+        <br>
+        <span class="option-title" id="option-two"></span>
+      </div>
+    </div>
+  </div>
+  <div class= "lbls"> <br><a href="fruipManagement.html"> Back to Fruip Management</a> </div>
+</body>
+
+<script>
+window.onload =  setup();
+
+var pointA = 1;
+var pointB = 1;
+var totalVotes = pointA + pointB;
+
+function addleft() {
+  pointA += 1;
+  totalVotes += 1;
+  updatePoints();
+  console.log(pointA + ' '+ pointB);
+}
+
+function addright() {
+  pointB += 1;
+  totalVotes += 1;
+  updatePoints();
+  console.log(pointA + ' '+ pointB);
+}
+
+function updatePoints() {
+  var percentA = (pointA / totalVotes) * 100;
+  var percentB = (pointB / totalVotes) * 100;
+  var size = percentA + "% " + percentB + "%";
+
+  document.getElementById("size-one").innerHTML = Math.round(percentA) + '%';
+  document.getElementById("size-two").innerHTML = Math.round(percentB) + '%';
+  document.getElementById("voting-box").style.gridTemplateColumns=  percentA + "% " + percentB + "%";
+
+  document.getElementById("total-votes").innerHTML = "Total Votes Casted: " + totalVotes; 
+  document.getElementById("total-left").innerHTML = "Option A: " + pointA;
+  document.getElementById("total-right").innerHTML = "Option B: " + pointB;
+}
+
+function setup() {
+  pointA = 1;
+  pointB = 1;
+  totalVotes = pointA + pointB;
+
+  document.getElementById("option-one").innerHTML = "Option 1";
+  document.getElementById("option-two").innerHTML = "Option 2";
+
+  updatePoints();
+}
+</script>
