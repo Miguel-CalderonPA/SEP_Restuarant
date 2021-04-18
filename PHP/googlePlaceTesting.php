@@ -6,7 +6,7 @@ $absPath = realpath("../googleplace/src/Request.php");
 
 echo $absPath;
 var_dump($absPath);
-\googleplace\Request::$api_key = 'AIzaSyCVTXoxNH-OCRPWsxQB9jQHLbr_MFiarw8';
+\googleplace\Request::$api_key = 'GOOGLE PLACES KEY';
 
 
 
