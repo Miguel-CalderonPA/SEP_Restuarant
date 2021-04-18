@@ -23,14 +23,15 @@
 		$stmt=$myPDO->prepare($sql);
 		$stmt->bindValue(':gName',$gName);
                try{
-			 $fruips=$stmt->execute();
+			 $stmt->execute();
 		}
 		catch(PDOException $e){
 
 			echo $e->getMessage();
 
 		}
-                if(empty($fruips['gName']))
+		$fruips=$stmt->fetch();
+                if(empty($fruips['gname']))
                 {
 			
 			$sql="Insert into fruips(gName, owner) values(:gName, :useName)";
@@ -38,7 +39,7 @@
 			$stmt->bindValue(':gName', $gName);
 			$stmt->bindValue(':useName',$useName);
 			$stmt->execute();
-			$sql="Insert into membership(useName, gName) values(:useName, :gName)";
+			$sql="Insert into membership(useName, gName, pending) values(:useName, :gName, false)";
                         $stmt=$myPDO->prepare($sql);
                         $stmt->bindValue(':gName', $gName);
                         $stmt->bindValue(':useName',$useName);

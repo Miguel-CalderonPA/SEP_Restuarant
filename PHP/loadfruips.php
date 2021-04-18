@@ -24,7 +24,7 @@
                 }
 
                 //prepare input for sanatization
-                $sql="SELECT gname FROM membership WHERE usename=:useName";
+                $sql="SELECT gname, reqadd  FROM membership WHERE usename=:useName and (pending=false or reqadd=true)";
                 $statement=$myPDO->prepare($sql);
                 $statement->bindValue(':useName',$useName);
                try{
@@ -42,40 +42,47 @@
 			$tableEntries="";
 			foreach($fruips as $row){
 
-				foreach($row as $key){
-
 					
 
                        			$sql="SELECT owner FROM fruips WHERE gName=:gName";
                         		$stmt=$myPDO->prepare($sql);
-                        		$stmt->bindValue(':gName', $key);
+                        		$stmt->bindValue(':gName', $row['gname']);
                        			$stmt->execute();
 					$checkOwn=$stmt->fetch();
 					$tableEntries=$tableEntries."<tr>";
-					$tableEntries=$tableEntries.'<td>'.$key.'</td>';
+					$tableEntries=$tableEntries.'<td>'.$row['gname'].'</td>';
 					
 					//currently voting
 					$tableEntries=$tableEntries.'<td></td>';
+					var_dump($row);
+					if($row['reqadd']==true){
+						//will need to alter this to make it not alterable, maybe store add requests in diff session array
+						$tableEntries=$tableEntries."<td>Added:<button type='button' name='appJoin' class='appJoin'  id='appJoin{$count}' value='{$row['gname']}'>Accept</button>";
+                            			$tableEntries=$tableEntries."<button type='button' name='disJoin' class='disJoin' id='disJoin{$count}' value='{$row['gname']}'>Decline</button></td>";
 
+					}
+					else{
 
 					//voting status
 					$tableEntries=$tableEntries.'<td></td>';
-
+					}
 					//results
 					$tableEntries=$tableEntries.'<td></td>';
 
 					//manage
+					 
+
 					
 					if($checkOwn['owner']==$useName){
 
-						$tableEntries=$tableEntries."<td><button type='button' name='manage' id='manage'  value='{$count}'>Manage</button></td>";
-						array_push($ownedFruips, $key);
+						$tableEntries=$tableEntries."<td><button type='button' name='manage' id='manage{$count}' onClick='manageFunction(this.value)'  value='{$count}'>Manage</button></td>";
+						array_push($ownedFruips, $row['gname']);
 						$count++;
 
 					}
 					$tableEntries=$tableEntries."</tr>";
 				}
-			}
+			
 			$_SESSION['owned']=$ownedFruips;
 			echo $tableEntries;
                 }

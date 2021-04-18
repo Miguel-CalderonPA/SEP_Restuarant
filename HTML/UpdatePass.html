@@ -2,17 +2,15 @@
 <html>
     <head>
         <title>Forgot Password</title>
-<script src="jquery-1.11.1.js"></script>
-<script>
-	$(document).ready(function(){
-
-		$("#login").on("click",function() {
-			$.post("../PHP/UpdatePass.php", {email:$("#email").val(),pwd:$("#pwd").val()},
-				function(result){ $("#popup").html(result);
-				});
-		});
-	});
-						
+		<script src="jquery-1.11.1.js"></script>
+		<script>
+			$(document).ready(function(){ // when document loads
+				$("#login").on("click",function() { // when login is clicked
+					$.post("../PHP/UpdatePass.php", {email:$("#email").val(),pwd:$("#pwd").val()}, // send data to php page
+					function(result){ $("#popup").html(result); // return appopriate results
+					}); // end post data
+				}); // end click login
+			}); // end document			
 </script>
         <link rel="stylesheet" href= "../CSS/forgotPasswordStyle.css" type = "text/css"> 
     </head>
@@ -29,6 +27,6 @@
                  <input type="button" id="login" name="login"  value="Enter">
 				
             <form>
-<br><a href="http://ec2-52-14-132-218.us-east-2.compute.amazonaws.com/efs-mount-point/sampledir/HTML/login.html"> Back to Login </a>
+<br><a href="login.html"> Back to Login </a>
     </body>
     </html>

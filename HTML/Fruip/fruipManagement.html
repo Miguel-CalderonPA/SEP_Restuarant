@@ -3,6 +3,89 @@
 <head>
     <title>(<*)homper Fruip Management Page</title>
     <link rel="stylesheet" href= "../../CSS/fruipManagementStyle.css" type = "text/css"> 
+<script src="../jquery-1.11.1.js"></script>
+<script>
+
+var num=getVal();
+var confirmDel=false;
+        $(document).ready(function(){
+                $(window).load(function() {
+                        $.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){
+                                $("#membersTable").html(result);
+                        });
+			$.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){
+                                $("#joinTable").html(result);
+                        });
+
+                });
+		$("#addBtn").on("click", function(){
+			$.post("../../PHP/addmember.php",{fruipNum:num, useName:$("#addMem").val()}, function(result){
+				$("#popup").html(result);
+		});});
+		// tried adding second event trigger so this one would go first before sending post data
+	/*	$("#delFBtn").on("click", function(){
+			var option = confirm("Permanently delete Fruip?");
+			var option2 = confirm("Are you sure?");
+			if ((option == true) && (option2 == true)) {
+				confirm = true;
+			} 		
+			else {
+				alert("Canceled");
+				confirm = false;
+			}
+		}); */
+		$("#delFBtn").on("click", function(){
+			$.post("../../PHP/deleteFruip.php",{fruipNum:num, confirmDel:confirmDel}, function(result){
+				$("#popup").html(result);
+		});});
+
+	});
+
+	$(document).on("click", ".approve",function(){
+		$.post("../../PHP/acceptjoin.php", {fruipNum:num, useName:$(this).val()});
+                        $.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){
+                                $("#membersTable").html(result);
+                        });
+                        $.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){
+                                $("#joinTable").html(result);
+                        });
+	});
+	$(document).on("click", ".dis",function(){
+		        $.post("../../PHP/rejectjoin.php", {fruipNum:num, useName:$(this).val()}, function(result){
+				$("#popup").html(result)});
+                        $.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){
+                                $("#membersTable").html(result);
+                        });
+                        $.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){
+                                $("#joinTable").html(result);
+                        });
+        });
+
+	function getVal(){
+
+		url=window.location.href;
+		var regex= new RegExp('.*var='+'([0-9])'),
+		results=regex.exec(url);
+		return(results[1]);
+	}
+	function deleteFruipInquiry() {
+	var txt;
+	var option = confirm("Permanently delete Fruip?");
+	var option2 = confirm("Are you sure?");
+	if ((option == true) && (option2 == true)) {
+		confirmDel = true;
+	} else {
+		alert("Canceled");
+		confirmDel = false;
+	}
+}
+
+
+</script>
+<style>
+
+
+</style>
 </head>
 
 <body>
@@ -11,35 +94,63 @@
             <center><img src="../../Images/ChomperLogo.jpg" alt = "ChomperLogo" id="ChomperLogo"><br><h1>(*<)homper Fruip Management</h1></center>
         </div>
     </div>
-
+	<div id="popup"></div>
     <div id="container">
         <div class="sidebar">
             <ul id="nav">
                 <li>
-                    <span>
-        </span>
+                    <span></span>
                     <a class="selected" href="voting.html">Initiate Voting</a>
                 </li>
-                <li>
-                    <span>
-        </span><a href="#">View Fruip Members</a>
+                <li>			
+					<span></span>
+					<a href="FruipDashboard.html">Back to Dashboard</a>
                 </li>
-                <li>
-                    <span>
-        </span><a href="add.html">Add user to Fruip</a>
+				<li> <!-- STILL TESTING waiting for AWS to update correctly-->
+					<span><button type="button" name="delFBtn" id="delFBtn" class="delFBtn" onclick="deleteFruipInquiry()">Delete Fruip</button></span>
+					<a href=#></a>
                 </li>
-                <li>
-                    <span>
-        </span><a href="remove.html">Remove user from Fruip</a>
-                </li>
-				<li>
-					<span>
-        </span><a href="FruipDashboard.html">Back to Dashboard</a>
-                </li>
+		        <li>
+                    <span></span>
+					<br><br><br>
+					Add user:<input type="text" name="addMem" id="addMem" class="addMem"  placeholder="Please enter a user name">
+					<button type="button" name="addBtn" id="addBtn" class="addBtn" >Send Add Request</button>
+
+                </li>       
             </ul>
         </div>
         <div class="content">
-            <h2>Your Fruip Information</h2>
+		<div id = "data">
+            <h2>Your Fruip Members</h2>
+		
+                <center><h3> Fruips </h3>
+                        <p> All your Fruip's members will be displayed here! </center>
+                <center>
+                        <table border='2'>
+                                <thead>
+                                        <tr>
+                                                <th>Name</th>
+                                                <th>Status</th>
+                                                <th>Remove?</th>
+                                        </tr>
+                                </thead>
+                                <tbody id="membersTable" name="membersTable"></tbody>
+
+                        </table>
+			<table border='2'>
+                                <thead>
+                                        <tr>
+                                                <th>Name</th>
+                                                <th>Approve/Disapprove</th>
+                                        </tr>
+                                </thead>
+                                <tbody id="joinTable" name="joinTable"></tbody>
+
+                        </table>
+
+
+
+        </div>
         </div>
     </div>
 </body>

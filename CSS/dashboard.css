@@ -1,39 +1,42 @@
+/*Style for basic html portion*/
 body {
 	margin: 0px;
 	border: 0px;
 	background: url(../Images/resturant2.jpg) fixed center;  
 	font-family: sans-serif;
 }
-ul li {
+/*Bullet points for fruip options on side bar*/
+ul li { 
 	padding: 20px;
 	border-bottom: 2px solid grey;
 }
+/*Changes color for side bar*/
 ul li:hover{
 	background: #fd5e53;
 	color: white;
 }
+/*Logo Options*/
 #ChomperLogo{
 	border-radius: 50px;
 	width:6%;
 	Float: left;
 	padding: 5px;
 }
-ul li:hover{
-	background: #fd5e53;
-	color: white;
-}
+/*Banner across the top*/
 #header{
 	width: 100%;
 	height: 120px;
 	background: #c68958;
 	color: #000000;
 }
+/*Side panel for fruip options*/
 #sidebar{
-	width: 225px;
+	width: 250px;
 	height: 100%;
 	background: #ffdb58;
 	float: left;
 }
+/*Data table that dynamically changes*/
 #data {
 	height: 800px;
 	background: #fd5e53;

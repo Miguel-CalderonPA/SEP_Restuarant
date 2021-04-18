@@ -1,32 +1,39 @@
+/*Style for basic html portion*/
 body{  
     font-family: Calibri, Helvetica, sans-serif;  
     background-color: #fd5e53; 
     text-align: center; 
     color: white;
-}  
+} 
+/*Logo Left Corner*/
 img#one {
 	float:left;
 	width: 15%
 }
+/*Logo Right Corner*/
 img#two{
 	float:right;
 	width: 15%;
 }
+/*Section of page containing form*/
 .container {  
     padding: 100px;  
     background: url(../Images/resturant2.jpg) fixed center;  
-}  
+} 
+/*Names for textboxes*/ 
 label {
     display: inline-block;
     width: 150px;
     text-align: right;
-    }
+}
+/*Hyper links Style*/
 a {
 	font-size:12px;
 	background-color:#fd5e53;
 	border: 2px solid #000000;
 	padding:10px;
 }
+/*style to change enter input box for emails*/
 input[type=email], textarea {
 	 width: 20%;
     padding: 15px;  
@@ -36,7 +43,7 @@ input[type=email], textarea {
     background: #f1f1f1;  
     text-align: center;
 }  
-	
+/*Style text entry boxes*/
 input[type=text], input[type=password], input[type=email], textarea {  
     width: 20%;
     padding: 15px;  
@@ -46,36 +53,38 @@ input[type=text], input[type=password], input[type=email], textarea {
     background: #f1f1f1;  
     text-align: center;
 }  
-
+/*Style text entry boxes with tab order */
 input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {  
     outline: none;  
 	width 25%;
 }  
-
+/*Each textbox has its own section*/
 .lbls {  
     padding: 10px 160px 10px 0;  
 	margin: auto;
 	background-color:#000000;opacity:0.8;
 	width: 50%;
 }
+/*NOT SURE WHAT ITS FOR*/
 .msgBox {  
     padding: 10px; 
 	margin: auto;
 	background-color:#000000;opacity:0.8;
 	width: 50%;
-}  
+}
+/*Div Container for the title section*/
 .title {  
     padding: 10px;  
 	margin: auto;
 	background-color:#000000;opacity:0.8;
 	width: 50%;
 }  
-
+/*Style for bar across screen*/
 hr {  
     border: 1px solid #f1f1f1;  
     margin-bottom: 25px;  
 }  
-
+/*Style for the button to register account*/
 .registerbtn {  
     background-color: red;
     color: white;  
@@ -87,7 +96,7 @@ hr {
     opacity: 0.9; 
 	width: 10%
 }  
-  
+ /*Gives Hover ability if we wanted*/
 .registerbtn:hover {  
     opacity: 1;  
 } 

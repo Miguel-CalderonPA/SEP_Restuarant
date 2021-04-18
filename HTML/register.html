@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Register</title>
-
-<script src="jquery-1.11.1.js"></script>
-<script>
-	$(document).ready(function(){
-
-		$("#submit").on("click",function() {
-			$.post("../PHP/register.php", {useName:$("#useName").val(),fName:$("#fName").val(),
-				lName:$("#lName").val(),email:$("#email").val(),pwd:$("#pwd").val()},
-				function(result){ $("#popup").html(result);
-				});
-		});
-	});
-						
-
- 
-
+	<head>
+		<title>Register</title>
+		<script src="jquery-1.11.1.js"></script>
+		<script>
+			$(document).ready(function(){ // when document loads
+				$("#submit").on("click",function() { // when submittion is clicked
+					$.post("../PHP/register.php", {useName:$("#useName").val(),fName:$("#fName").val(),
+					lName:$("#lName").val(),email:$("#email").val(),pwd:$("#pwd").val()}, // send user data to register
+					function(result){ $("#popup").html(result); // return results back
+					}); // end post data
+				}); // end click submit
+			}); // end document
 </script>
 </head>
 <body>

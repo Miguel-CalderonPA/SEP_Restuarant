@@ -1,0 +1,26 @@
+{
+    "name": "digitaldream/googleplace",
+    "description": "Google Places API library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tuhin",
+            "email": "digitaldreams40@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GooglePlace\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "suggest":{
+    "tightenco/collect": "Must be included if using outside laravel"
+    }
+	"require":{
+    "digitaldream/googleplace":"1.*"
+	}
+}

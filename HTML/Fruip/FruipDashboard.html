@@ -1,75 +1,80 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title> Dashboard </title>
-<link rel="stylesheet" href= "../../CSS/dashboard.css" type = "text/css">
-<script src="../jquery-1.11.1.js"></script>
-<script>
-        $(document).ready(function(){
-                $(window).load(function() {
-                        $.post("../../PHP/loadfruips.php", function(result){
-                                $("#fruipTable").html(result);
-                        });
-                });
-                $("#joinBtn").on("click",function() {
-                        $.post("../../PHP/joinfruip.php", {fruipName:$("#joinFruip").val()},
-                                function(result){ $("#popup").html(result);
-                                });
-                });
-        });
-</script>
+	<head>
+		<title> Dashboard </title>
+		<link rel="stylesheet" href= "../../CSS/dashboard.css" type = "text/css">
+		<script src="../jquery-1.11.1.js"></script>
+		<script>
+			$(document).ready(function(){
+				$(window).load(function() { // what to load when window starts
+					$.post("../../PHP/loadfruips.php", function(result){ // on click send data to load fruip
+						$("#fruipTable").html(result);  // on return post returning data in a pop up
+                    }); // end post data
+                }); // end window load
+                $("#joinBtn").on("click",function() { // on click send data to joinFruip
+					$.post("../../PHP/joinfruip.php", {fruipName:$("#joinFruip").val()}, function(result){ // send fruip number
+						$("#popup").html(result); // on return post returning data in a pop up
+                    }); // end post data
+                }); // end joinBtn
+        }); // end document ready
+	    $(document).on("click", ".appJoin",function(){ // when appJoin is clicked
+			$.post("../../PHP/acceptadd.php", {gName:$(this).val()}); // send group name data to acceptadd
+				$.post("../../PHP/loadfruips.php", function(result){ // send post data to load fruips
+					$("#fruipTable").html(result); // update table on current page
+                    }); // end post data    
+        }); // end document
+		$(document).on("click", ".disJoin",function(){ // when disJoin is clicked
+			$.post("../../PHP/rejectadd.php", {gName:$(this).val()}); // send group name to rejectAdd
+				$.post("../../PHP/loadfruips.php", function(result){ // send data to load fruip
+					$("#fruipTable").html(result);
+                }); // end post data
+        }); // end document
+		function manageFunction(num){
+			location.href="fruipManagement.html?var="+num;	// send to manage page with fruip number
+		} // end manageFunction
+	</script>
 
-<style>
-#sidebar{
-	width: 250px;
-	height: 100%;
-	background: #ffdb58;
-	float: left;
-}
+	<style>
 
-</style>
-</head>
-<body>
+
+	</style>
+
+	</head>
+	<body>
         <div id = "header">
-                <center><img src="../../Images/ChomperLogo.jpg" alt = "ChomperLogo" id="ChomperLogo"><br><h1>Fruip Dashboard</h1> </center>
-	<div id="popup"></div>
+			<center><img src="../../Images/ChomperLogo.jpg" alt = "ChomperLogo" id="ChomperLogo"><br><h1>Fruip Dashboard</h1> </center>
+			<div id="popup"></div>
         </div>
         <div id = "sidebar">
-        <ul>
-                <a href="FruipCreation.html"><li> Add </li> </a>
-                <a href="FruipDeletion.html"><li> Del </li> </a>
-                <a href=#> <li> Browse Fruips </li> </a>
-                <a href="../login.html"><li> Logout </li></a>
-                <li>
-                <input type="text" name="joinFruip" id="joinFruip" placeholder="Please enter a fruip name">
-                <button type="button" name="joinBtn" id="joinBtn">Send Join Request</button>
-                </li>
-                
-        </ul>
-
-
+			<ul>
+				<a href="FruipCreation.html"><li> Add </li> </a>
+				<a href=#> <li> Browse Fruips </li> </a>
+				<a href="../login.html"><li> Logout </li></a>
+				<li>
+					<input type="text" name="joinFruip" id="joinFruip" placeholder="Please enter a fruip name">
+					<button type="button" name="joinBtn" id="joinBtn">Send Join Request</button>
+				</li>
+			</ul>
         </div>
         <div id = "data">
-                <center><h3> Fruips </h3>
-                        <p> All your Fruips will be displayed here! </center>
-                <center>
-                        <table border='2'>
-                                <thead>
-                                        <tr>
-                                                <th>Fruip</th>
-                                                <th>Currently Voting?</th>
-                                                <th>Voting status</th>
-                                                <th>Results</th>
-                                                <th>Manage</th>
-                                        </tr>
-                                </thead>
-                                <tbody id="fruipTable" name="fruipTable"></tbody>
-
-                        </table>
-
-
+            <center>
+				<h3> Fruips </h3>
+                <p> All your Fruips will be displayed here! 
+			</center>
+            <center>
+				<table border='2'>
+					<thead>
+                            <tr>
+                                <th>Fruip</th>
+                                <th>Currently Voting?</th>
+                                <th>Voting status</th>
+                                <th>Results</th>
+                                <th>Manage</th>
+                            </tr>
+                    </thead>
+                    <tbody id="fruipTable" name="fruipTable"></tbody>
+                </table>
         </div>
-
 </body>
 </html>
 

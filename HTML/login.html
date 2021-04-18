@@ -2,22 +2,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-<script src="jquery-1.11.1.js"></script>
-<script>
-        $(document).ready(function(){
-
-                $("#login").on("click",function() {
-                        $.post("../PHP/login.php", {useName:$("#useName").val(),pwd:$("#pwd").val()},
-                                function(result){ $("#popup").html(result);
-                                });
-                });
-        });
-
-
-
-
-</script>
-
+		<script src="jquery-1.11.1.js"></script>
+		<script>
+        $(document).ready(function(){ // when document loads
+			$("#login").on("click",function() { // when login is clicked
+				$.post("../PHP/login.php", {useName:$("#useName").val(),pwd:$("#pwd").val()}, // send user data to php
+				function(result){ $("#popup").html(result); // shows results from php
+                }); // end post data
+            }); // end button click
+        }); // end document
+		</script>
         <title>Login page</title>
         <link rel="stylesheet" href= "../CSS/style.css" type = "text/css">
     </head>
@@ -30,9 +24,8 @@
                 <p>Username</p>
                 <input type="text" id="useName"  name="useName" placeholder="Enter Username">
                 <p>Password</p>
-                <input type="text" id="pwd"  name="pwd" placeholder="Enter Password">
+                <input type="password" id="pwd"  name="pwd" placeholder="Enter Password">
                 <input type="button" id="login" name="login"  value="Login">
-		<!-- note, don't change css to accomidate submit, may alter back for jquery -->
                 <a href = "register.html">Create an account</a><br>
                 <a href = "forgotPassword.html">Forgot Password?</a><br>
                                 <a href = "helpTicket.html">Contact Us</a>
