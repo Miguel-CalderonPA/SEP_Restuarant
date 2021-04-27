@@ -1,4 +1,21 @@
-/*Style for ALL elements*/
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Fruip Database </title>
+		<link rel="stylesheet" "../../CSS/fruipManagementStyle.css" type = "text/css">
+		<script src="../jquery-1.11.1.js"></script>
+		<script>
+			$(document).ready(function(){
+				$(window).load(function() { // what to load when window starts
+					$.post("../../PHP/loadAllFruips.php", function(result){ // on click send data to load fruip
+						$("#fruipTable").html(result);  // on return post returning data in a pop up
+                    }); // end post data
+                }); // end window load
+        }); // end document ready
+	</script>
+
+	<style>
+/*Style for ALL elements COPIED INTO HERE BECAUSE AWS DUMB LMAO*/
 * {
     margin: 0;
     padding: 0;
@@ -13,9 +30,9 @@ h1 {
 h2 {
     text-align: center;
 }
-/* Smaller-er Title Style*/
 h3 {
-	text-align:center;
+	//text-align:center;
+	margin:auto;
 }
 /*Logo Style*/
   #ChomperLogo{
@@ -28,6 +45,7 @@ h3 {
 html,body {
     font-family: 'Open Sans';
     height: 100%;
+	background-color:#fd5e53;
 }
 /*specific instance style, that can be put anywhere*/
 span {
@@ -48,8 +66,10 @@ div#container {
 }
 /*Styles data that is coming back from php page*/
  #data {
+	text-align:center;
 	background: #ff9900;
 	color: #000000;
+	float:center;
 }
 /*style for the sidebar displaying fruip options*/
 .sidebar {
@@ -153,3 +173,33 @@ div#box .box-panel {
 	display: none;
     }
 }
+	</style>
+	</head>
+	<body>
+        <div id="header">
+			<div class="logo">
+				<center><img src="../../Images/ChomperLogo.jpg" alt = "ChomperLogo" id="ChomperLogo"><br><h1> Explore Fruips!</h1></center>
+			</div> 
+		</div>
+        <div id = "data">
+			<h3> All Fruips on Chomper!</h3> <br><br>
+				<center>
+					<h3> All Fruips on Chomper!</h3> <br><br>
+					<p> All Fruips will be displayed here! </p>
+				</center>
+				<center>
+					<table border='2'>
+						<thead>
+                            <tr>
+                                <th>Fruip</th>
+                                <th>Owner</th>
+                            </tr>
+                    </thead>
+                    <tbody id="fruipTable" name="fruipTable"></tbody>
+					</table>
+				</center>
+				<br>
+			</div>
+	</body>
+</html>
+

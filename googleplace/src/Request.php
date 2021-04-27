@@ -1,6 +1,11 @@
 <?php
 namespace GooglePlace;
-
+namespace GuzzleHttp;
+$path = $_SERVER['DOCUMENT_ROOT'];
+//var_dump($path);
+$path .= "/efs-mount-point/sampledir/GuzzleHttp/src/Client.php";
+//var_dump($path);
+include($path);
 use GuzzleHttp\Client;
 
 /**
