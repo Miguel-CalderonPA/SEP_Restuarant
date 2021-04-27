@@ -1,11 +1,20 @@
 <?php
-
+namespace GooglePlace;
 namespace GooglePlace\Services;
 /*
 Modified by Miguel Calderon 
 */
-require_once "../Request.php"; // needed to add this - Miguel
-include "../Helpers/PlaceRequest.php"; // this too
+//include "../Request.php"; // needed to add this - Miguel
+$path = $_SERVER['DOCUMENT_ROOT'];
+//var_dump($path);
+$path .= "/efs-mount-point/sampledir/googleplace/src/Request.php";
+//var_dump($path);
+include($path);
+$path = $_SERVER['DOCUMENT_ROOT'];
+//var_dump($path);
+$path .= "/efs-mount-point/sampledir/googleplace/src/Helpers/PlaceRequest.php";
+//var_dump($path);
+include_once($path);
 
 use GooglePlace\Helpers\PlaceRequest;
 use GooglePlace\Response;
