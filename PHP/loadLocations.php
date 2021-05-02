@@ -114,7 +114,7 @@ function getXMLArr($zip){
 	$context  = stream_context_create(array('http' => array('header' => 'Accept: application/xml')));
 	// The places api information
 
-	$url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+{$zip}+&radius=500&key=AIzaSyCVTXoxNH-OCRPWsxQB9jQHLbr_MFiarw8&types=restaurant";
+	$url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+{$zip}+&radius=500&key={API-KEY}&types=restaurant";
 	// Grab the contents of the file, with no base path and using prebuilt context resource
 	$xmlData = file_get_contents($url, false, $context);
 	// grab the XML data
@@ -131,7 +131,7 @@ function getXMLArr($zip){
 		$locationsAttr["name"] = (string)$location->name;
 		$locationsAttr["address"] = (string)$location->formatted_address;
 		$locationsAttr["rating"] = (string)$location->rating;
-		$locationsAttr["photo_reference"] = (string)$baseUrl . (string)$location->photo->photo_reference . "&key=AIzaSyCVTXoxNH-OCRPWsxQB9jQHLbr_MFiarw8";
+		$locationsAttr["photo_reference"] = (string)$baseUrl . (string)$location->photo->photo_reference . "&key={API-KEY}";
 	// Testing Code - to be deleted later
 	//echo "<p>The locations name is: " . $locationsAttr['name'] . "</p>";
 	//echo "<p>The address is: " . $locationsAttr['address'] . "</p>";
