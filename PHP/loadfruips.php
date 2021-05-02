@@ -13,6 +13,7 @@
 ];
 	
 		$ownedFruips=[];
+		$allFruips=[];
 	
                 try{
                         //create PDO object
@@ -37,7 +38,8 @@
 
                 }
 		$fruips=$statement->fetchAll();
-		$count=0;
+		$countOwned=0;
+		$countAll=0;
                 if(!empty($fruips))
                 {
 			$tableEntries="";
@@ -45,46 +47,102 @@
 
 					
 
-                       			$sql="SELECT owner FROM fruips WHERE gName=:gName";
+
+                       			$sql="SELECT owner, voting FROM fruips WHERE gName=:gName";
                         		$stmt=$myPDO->prepare($sql);
                         		$stmt->bindValue(':gName', $row['gname']);
                        			$stmt->execute();
 					$checkOwn=$stmt->fetch();
+
 					$tableEntries=$tableEntries."<tr>";
 					$tableEntries=$tableEntries.'<td>'.$row['gname'].'</td>';
 					
 					//currently voting
-					$tableEntries=$tableEntries.'<td></td>';
-					var_dump($row);
-					if($row['reqadd']==true){
+					if($checkOwn['voting'])
+					{
+						$sql="SELECT count(useName) from membership where gname=:gName and currplace>0";
+                                        	$stmt=$myPDO->prepare($sql);
+						$stmt->bindValue(':gName', $row['gname']);
+                                        	$stmt->execute();
+                                        	$currVotes=$stmt->fetch();
+						$currVotes=$currVotes['count'];
+					
+						$sql="SELECT count(useName) from membership where gname=:gName";
+                                        	$stmt=$myPDO->prepare($sql);
+						$stmt->bindValue(':gName', $row['gname']);
+                                        	$stmt->execute();
+                                        	$total=$stmt->fetch();
+						$total=$total['count'];
+
+						$tableEntries=$tableEntries."<td>{$currVotes}/{$total} votes remaining</td>";
+
+
+					}
+					else
+					{
+						$tableEntries=$tableEntries.'<td>Not voting</td>';
+
+					}
+					if($row['reqadd']){
 						//will need to alter this to make it not alterable, maybe store add requests in diff session array
 						$tableEntries=$tableEntries."<td>Added:<button type='button' name='appJoin' class='appJoin'  id='appJoin{$count}' value='{$row['gname']}'>Accept</button>";
                             			$tableEntries=$tableEntries."<button type='button' name='disJoin' class='disJoin' id='disJoin{$count}' value='{$row['gname']}'>Decline</button></td>";
+						//results
+                                        	$tableEntries=$tableEntries.'<td>N/A</td>';
+
 
 					}
 					else{
 
-					//voting status
-					$tableEntries=$tableEntries.'<td></td>';
-					}
-					//results
-					$tableEntries=$tableEntries.'<td></td>';
 
-					//manage
-					 
 
 					
-					if($checkOwn['owner']==$useName){
+					
+					//voting status
+						if($checkOwn['voting'])
+                                        	{
+							$tableEntries=$tableEntries."<td><button type='button' name='vote' id='vote{$countAll}' onClick='voteFunction(this.value)'  value='{$countAll}'>Vote</button></td>";
+							$tableEntries=$tableEntries.'<td>N/A</td>';
 
-						$tableEntries=$tableEntries."<td><button type='button' name='manage' id='manage{$count}' onClick='manageFunction(this.value)'  value='{$count}'>Manage</button></td>";
+
+                                        	}
+						else{ //voting is not currently ongoing
+							$tableEntries=$tableEntries."<td>N/A</td>";
+								
+							//results: Checks for places connected to fruip, if there only exists one it is a winner and the results button should be displayed
+							$sql="select count(name) as name from places where gname=:gName";
+							$stmt=$myPDO->prepare($sql);
+							$stmt->bindValue(':gName',$row['gname']);
+							$stmt->execute();
+							$getPlaces=$stmt->fetch();
+							if($getPlaces['name']==1){
+
+								 $tableEntries=$tableEntries."<td><button type='button' name='result' id='result{$countAll}' onClick='resultsFunction(this.value)'  value='{$countAll}'>Results</button></td>";
+
+
+							}
+							else{
+
+								 $tableEntries=$tableEntries.'<td>N/A</td>';
+
+							}
+
+
+						}
+					}
+					if($checkOwn['owner']==$useName){ //user is owner, give them access to management page
+
+						$tableEntries=$tableEntries."<td><button type='button' name='manage' id='manage{$countOwned}' onClick='manageFunction(this.value)'  value='{$countOwned}'>Manage</button></td>";
 						array_push($ownedFruips, $row['gname']);
-						$count++;
+						$countOwned++;
 
 					}
 					$tableEntries=$tableEntries."</tr>";
+					array_push($allFruips, $row['gname']);
+					$countAll++;
 				}
-			
 			$_SESSION['owned']=$ownedFruips;
+			$_SESSION['fruips']=$allFruips;
 			echo $tableEntries;
                 }
                 else{

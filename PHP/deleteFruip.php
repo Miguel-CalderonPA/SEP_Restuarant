@@ -7,8 +7,9 @@
 		$fruipNum = $_POST["fruipNum"];
 		$gName = $userFruips[$fruipNum];
 		$confirmation = $_POST["confirmDel"];
+		//echo("<script>alert($confirmation);</script>"); // testing to be deleted
 		// If user doens't cancel deletion process
-		if ($confirmation) {
+		if ($confirmation==1) {
 			$options = [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,\PDO::ATTR_EMULATE_PREPARES => false,];
 			try{
 				//create PDO object (connect to server)

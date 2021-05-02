@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- Authors: Shivane Rathore -->
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../../CSS/swipeStyle.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"/> <!-- for distance away emoticon -->
+		<title>(<*)hopmer Swipe</title>
+	</head>
+
+	<script src="../jquery-1.11.1.js"></script>
+	<script>
+	//Author: Dan Klein
+	var num=getVal();
+        
+	$(document).ready(function(){
+		$(window).load(function() { // what to load when window starts
+		
+			$.post("../../PHP/getResult.php",{fruipNum:num}, function(result){
+                               $("#res").html(result);});
+		});
+        });
+
+
+		function getVal(){
+                // get data from page
+                url=window.location.href;
+                // ability to grab data
+                var regex= new RegExp('.*var='+'([0-9])'), results=regex.exec(url);
+                return(results[1]); // data
+        } // end function getVal
+
+	</script>
+
+
+	<script>
+		// 
+		function allowDrop(ev) {
+		  ev.preventDefault();
+		}
+		// dragging images
+		function drag(ev) {
+		  ev.dataTransfer.setData("text", ev.target.id);
+		}
+		
+		function drop(ev) {
+		  ev.preventDefault();
+		  var data = ev.dataTransfer.getData("text");
+		  ev.target.appendChild(document.getElementById(data));
+		}
+
+	</script>
+	<style>
+
+
+	</style>
+	<body>
+		<h1>The winning restauraunt is....!</h1>
+		<div class="popup" id="popup"></div>
+		<div class="container">
+        <div class="content">
+            <div class="card">
+                <div class="res", id="res", name="res">
+                    <div id="div1" name="div1"  ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <img class="res" src="../../Images/mcD.jpg" alt="" draggable="true" ondragstart="drag(event)" id="drag1" width="88" height="31">
+                    </div>  
+                    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+						<div class="profile">
+							<div class="name">Resturant Name</div>
+								<div class="local">
+									<i class="fas fa-map-marker-alt"></i>
+									<span>Distance Away</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				<p><a href="FruipDashboard.html">Back to Dashboard</a></p>
+			</div>
+		</div>
+	</body>
+</html>

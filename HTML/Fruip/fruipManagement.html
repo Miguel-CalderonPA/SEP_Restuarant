@@ -5,80 +5,89 @@
     <link rel="stylesheet" href= "../../CSS/fruipManagementStyle.css" type = "text/css"> 
 <script src="../jquery-1.11.1.js"></script>
 <script>
-
+// Global Javascript variables
 var num=getVal();
-var confirmDel=false;
+var confirmDel=0;
         $(document).ready(function(){
                 $(window).load(function() {
+						// Function to grab members of fruip
                         $.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){
                                 $("#membersTable").html(result);
-                        });
+                        }); // end loadmembers
+			// function to merge tables
 			$.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){
                                 $("#joinTable").html(result);
-                        });
+                        }); // end loadjoins
 
-                });
-		$("#addBtn").on("click", function(){
+                }); // end load page function
+
+		// add button hit
+		$("#addBtn").on("click", function(){ 
 			$.post("../../PHP/addmember.php",{fruipNum:num, useName:$("#addMem").val()}, function(result){
 				$("#popup").html(result);
-		});});
-		// tried adding second event trigger so this one would go first before sending post data
-	/*	$("#delFBtn").on("click", function(){
-			var option = confirm("Permanently delete Fruip?");
-			var option2 = confirm("Are you sure?");
-			if ((option == true) && (option2 == true)) {
-				confirm = true;
-			} 		
-			else {
-				alert("Canceled");
-				confirm = false;
-			}
-		}); */
+		});}); // end add button
+
+		// delete button
 		$("#delFBtn").on("click", function(){
 			$.post("../../PHP/deleteFruip.php",{fruipNum:num, confirmDel:confirmDel}, function(result){
 				$("#popup").html(result);
-		});});
+		});}); // end delete button
+		
+		$("#voteBtn").on("click", function(){
+                        //$.post("../../PHP/startvote.php",{fruipNum:num, zip:$("#zip").val()}, function(result){
+                        //        $("#popup").html(result);
+			$.post("../../PHP/loadLocations.php",{fruipNum:num, zip:$("#zip").val()}, function(result){
+				$("#popup").html(result);
+			
+                });}); // end add button
 
-	});
 
+		
+	}); // end on load
+	// on approve click for member
 	$(document).on("click", ".approve",function(){
+		// add member to table
 		$.post("../../PHP/acceptjoin.php", {fruipNum:num, useName:$(this).val()});
-                        $.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){
-                                $("#membersTable").html(result);
-                        });
-                        $.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){
-                                $("#joinTable").html(result);
-                        });
-	});
+		// reload members
+        $.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){$("#membersTable").html(result);});
+		// reload merge tables
+        $.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){$("#joinTable").html(result);});
+	}); // end approve button
+	// disapprove click for member
 	$(document).on("click", ".dis",function(){
-		        $.post("../../PHP/rejectjoin.php", {fruipNum:num, useName:$(this).val()}, function(result){
-				$("#popup").html(result)});
-                        $.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){
-                                $("#membersTable").html(result);
-                        });
-                        $.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){
-                                $("#joinTable").html(result);
-                        });
-        });
-
+		// delete request to table
+		$.post("../../PHP/rejectjoin.php", {fruipNum:num, useName:$(this).val()}, function(result){$("#popup").html(result)});
+		// reload members
+        $.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){$("#membersTable").html(result);});
+		// reload merge tables
+        $.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){$("#joinTable").html(result);});
+    });// end disapprove button
+	// get Val function 
 	function getVal(){
-
+		// get data from page
 		url=window.location.href;
-		var regex= new RegExp('.*var='+'([0-9])'),
-		results=regex.exec(url);
-		return(results[1]);
-	}
+		// ability to grab data
+		var regex= new RegExp('.*var='+'([0-9])'), results=regex.exec(url);
+		return(results[1]); // data
+	} // end function getVal
+	// delete Fruip inquiry
 	function deleteFruipInquiry() {
-	var txt;
-	var option = confirm("Permanently delete Fruip?");
-	var option2 = confirm("Are you sure?");
-	if ((option == true) && (option2 == true)) {
-		confirmDel = true;
-	} else {
-		alert("Canceled");
-		confirmDel = false;
-	}
-}
+		var option = confirm("Permanently delete Fruip?"); // ask
+		if (option == true) { // if they say yes
+			var option2 = confirm("Are you sure?"); // ask again
+			if (option2 == true) { // if they say yes again
+				confirmDel = 1; // confirm true
+			} // end if
+			else {
+				alert("Request Canceled"); // let user know it is canceled
+				confirmDel = 0; // reset value
+			} // end else
+		} // end if
+		else {
+			alert("Request Canceled"); // let user know it is canceled
+			confirmDel = 0; // reset value
+		}
+	} // end function DeleteFruip
 
 
 </script>
@@ -99,24 +108,22 @@ var confirmDel=false;
         <div class="sidebar">
             <ul id="nav">
                 <li>
-                    <span></span>
-                    <a class="selected" href="voting.html">Initiate Voting</a>
-                </li>
-                <li>			
-					<span></span>
-					<a href="FruipDashboard.html">Back to Dashboard</a>
-                </li>
-				<li> <!-- STILL TESTING waiting for AWS to update correctly-->
-					<span><button type="button" name="delFBtn" id="delFBtn" class="delFBtn" onclick="deleteFruipInquiry()">Delete Fruip</button></span>
-					<a href=#></a>
+						<br>
+						 <a href=#><input type="number" name="zip" id="zip" class="zip"  placeholder="Please enter the zip code">   
+						<button type="button" name="voteBtn" id="voteBtn" class="voteBtn" >Initiate voting</button></a><br>
+								
                 </li>
 		        <li>
-                    <span></span>
-					<br><br><br>
-					Add user:<input type="text" name="addMem" id="addMem" class="addMem"  placeholder="Please enter a user name">
-					<button type="button" name="addBtn" id="addBtn" class="addBtn" >Send Add Request</button>
-
-                </li>       
+                 
+					<a href=#><input type="text" name="addMem" id="addMem" class="addMem"  placeholder="Please enter a username">
+					<button type="button" name="addBtn" id="addBtn" class="addBtn" >Send Add Request</button></a>
+                </li>
+								<li>
+					<a href=#><button type="button" name="delFBtn" id="delFBtn" class="delFBtn" onclick="deleteFruipInquiry()">Delete Fruip</button></a><br>
+                </li>
+				<li>			
+					<a href="FruipDashboard.html">Back to Dashboard</a>
+                </li>
             </ul>
         </div>
         <div class="content">
