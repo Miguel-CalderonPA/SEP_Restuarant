@@ -1,0 +1,156 @@
+-----------------------------------------------------------
+ID: Help Ticket #03182021180038
+ Name: Dan
+ Email: miguelmusic321@gmail.com
+ Problem: Is there a dragon here?
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021180500
+ Name: Miguel
+ Email: thatonedude@aol.com
+ Problem: Is mayonnaise an instrument? 
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021180630
+ Name: Shivane
+ Email: woahwoahwoah@yahoo.com
+ Problem: Yes mayonnaise is an instrument! 
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021180716
+ Name: Dan
+ Email: dklein@chomper.com
+ Problem: Guys its not an instrument
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021180759
+ Name: Dan
+ Email: calderonm@chomper.com
+ Problem: Dan! how dare you!
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021181046
+ Name: Shivane
+ Email: emailatemail@yolo.com
+ Problem: Dan did you just speak in third person?
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021181253
+ Name: Miguel
+ Email: miguelmiguelmiguel@miguel.edu
+ Problem: He logged into his burner account LOL
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021181400
+ Name: Dan
+ Email: ohno@yikes.mil
+ Problem: Yikes, I have been caught!
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021181526
+ Name: Shivane
+ Email: storiesgalore@barnesandnoble.com
+ Problem: Oh dan, you are a silly goose
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021181606
+ Name: Miguel
+ Email: untitledgoose@peppapig.edu
+ Problem: The silliest of geese
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021182245
+ Name: Dan
+ Email: silliestogeese.com
+ Problem: (╯°□°)╯︵ ┻━┻
+
+-----------------------------------------------------------
+ID: Help Ticket #03182021182507
+ Name: Dan
+ Email: silliestogeese.com
+ Problem: (╯°□°)╯︵ ┻━┻
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021145459
+ Name: True
+ Email: ')
+ Problem: NULL
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021145930
+ Name: garbage
+ Email: fake
+ Problem: got bugs?
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021150141
+ Name: garbage
+ Email: fake
+ Problem: got bugs
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021150755
+ Name: Tester
+ Email: tester
+ Problem: tester
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021222624
+ Name: a
+ Email: a
+ Problem: a
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021222646
+ Name: aaaaa
+ Email: aaaaa
+ Problem: aaaaa
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021222656
+ Name: test
+ Email: test@gmail.com
+ Problem: a
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021222709
+ Name: test
+ Email: test123@gmail.com
+ Problem: aaaaaaa
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021222736
+ Name: test
+ Email: test123@gmail.com
+ Problem: aaaaaaa
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021222911
+ Name: test
+ Email: test123@gmail.com
+ Problem: aaaaaaa
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021222918
+ Name: Hello
+ Email: test123@gmail.com
+ Problem: aaaaaaa
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021222953
+ Name: testingtesting
+ Email: testing123@gmail.com
+ Problem: testing testing pls ignore :)
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021223015
+ Name: Testingtesting
+ Email: testing123@gmail.com
+ Problem: testing testing pls ignore :)
+
+-----------------------------------------------------------
+ID: Help Ticket #04272021223046
+ Name: tEsting
+ Email: testing123@gmail.com
+ Problem: testing :)
+

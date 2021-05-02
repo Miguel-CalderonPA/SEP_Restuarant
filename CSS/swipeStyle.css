@@ -1,0 +1,123 @@
+/*Style for ALL elements*/
+* {
+	box-sizing: border-box;
+}
+/*Title style*/
+h1 {text-align: center;}
+/* body style*/
+body {
+    text-align: center;
+    color: white;
+    background: url(../Images/resturant2.jpg);  
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+/*divider for location style*/
+.container {
+	display: flex;
+    background: url(../Images/resturant2.jpg);  
+}
+/*divider for inner location style*/
+.content {
+	width: 100%;
+	display: flex;
+	padding: 20px 0;
+	align-items: center;
+	flex-direction: column;
+}
+/*style for place display*/
+.container .card {
+	position: relative;
+	height: 450px;
+}
+/*style for place display resolution*/
+.content .card .res {
+	width: 380px;
+	height: 450px;
+	object-fit: cover;
+	border-radius: 10px;
+	box-shadow: 0 1px 10px 0 rgba(0, 20, 20, 0.5);
+}
+/*style for profile content */
+.content .card .res .profile {
+	position: absolute;
+	bottom: 0px;
+	left: 20px;
+}
+/*style for name in profile */
+.content .card .res .name {
+	color: #fff;
+	font-size: 32px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-shadow: 1px 1px 5px #444;
+}
+/*style for name in profile */
+.content .card .res .name span {
+	font-size: 26px;
+}
+/*style for distance in profile */
+.content .card .local {
+	display: flex;
+	align-items: center;
+	padding: 0 0 20px 0;
+}
+/*style for symbol in profile */
+.content .card .local i {
+	margin: 5px 0;
+	color: #fff;
+}
+/*style for distance letters in profile */
+.content .card .local span {
+	color: #fff;
+	padding: 0 10px;
+	text-shadow: 1px 1px 5px #444;
+}
+/*style for swipe buttons*/
+.content .buttons {
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+}
+/*style for swipe button logos */
+.content .buttons .no i {
+	color: black;
+	font-size: 33px;
+}
+/*style for swipe button logos */
+.content .buttons .heart i {
+	color: red;
+	font-size: 32px;
+}
+/*style for swipe button logos */
+.content .buttons .no,
+.content .buttons .heart {
+	background-color: #fff;
+	width: 90px;
+	height: 90px;
+	box-shadow: 0 1px 10px 0 rgba(0, 20, 20, 0.1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 70px;
+	margin: 4px;
+	transition: 0.2s transform;
+}
+/*style for hover over swipe button logos */
+.content .buttons .no:hover,
+.content .buttons .heart:hover {
+	transform: scale(1.1);
+}
+/*style for divders */
+#div1, #div2 {
+    float: left;
+    width: 100px;
+    height: 35px;
+}
+/*Hyper links Style*/
+a {
+	font-size:12px;
+	background-color:#fd5e53;
+	border: 2px solid #000000;
+	padding:10px;
+}
