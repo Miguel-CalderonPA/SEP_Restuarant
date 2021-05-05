@@ -5,12 +5,12 @@
 
 <script src="../jquery-1.11.1.js"></script>
 <script>
-        $(document).ready(function(){
-
-                $("#register").on("click",function() {
-                        $.post("../../PHP/createfruip.php", {fruipName:$("#fruipName").val()},
-                                function(result){ $("#popup").html(result);
-                                });
+        $(document).ready(function(){ // when page is ready
+			$(window).load(function() { // what to load when window starts
+				$.post("../../PHP/checkIfLogin.php", function(result){$("#popup").html(result);});}); 
+				$("#register").on("click",function() { // sends data to create Fruip
+					$.post("../../PHP/createfruip.php", {fruipName:$("#fruipName").val()},
+						function(result){ $("#popup").html(result);}); // returns if successful or not
                 });
         });
 </script>

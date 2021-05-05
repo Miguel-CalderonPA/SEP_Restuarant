@@ -4,7 +4,7 @@
 ]; // configuration for sql
     try{
         //create PDO object
-        $myPDO = new PDO('pgsql:host=localhost;dbname=postgres','danserver','AlphaSQ#1', $options); // login
+        $myPDO = new PDO('pgsql:host=localhost;dbname=DB_NAME','user','pass', $options);
     } // end try 
     catch(PDOException $e){
 		//check for connection errors

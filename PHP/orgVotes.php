@@ -20,14 +20,14 @@
 	//extra options to connect to database
 	$options = [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,\PDO::ATTR_EMULATE_PREPARES => false,];
 	try{//create PDO object (connect to server)
-		$myPDO = new PDO('pgsql:host=localhost;dbname=postgres','danserver','AlphaSQ#1', $options);
+		$myPDO = new PDO('pgsql:host=localhost;dbname=DB_NAME','user','pass', $options);
 	} // end try
 	catch(PDOException $e){ //check for connection errors
 		print"Error!: ".$e->getMessage()."<br/>";
 		die();
 	} // end catch
 			
-	/* FOR RESETTING ARRAY--------------------- to be deleted 
+	/* FOR RESETTING ARRAY--- to be deleted 
 		$updateVotesForDelete = null;
 		$sql="update membership set votes=:votes where gName=:gName and useName=:useName";
         $stmt=$myPDO->prepare($sql);
@@ -35,7 +35,8 @@
 		$stmt->bindValue(':useName',$useName);
 		$stmt->bindValue(':votes', $updateVotesForDelete);
         $stmt->execute();
-	//------------------------------*/
+	//------------------------------
+	*/
 		// Create SELECT statement
 		$sql="SELECT usename,array_to_json(votes) as votes, voted, currplace FROM membership WHERE gName=:gName and useName=:useName";
 		//prepare input for sanatization
@@ -112,62 +113,59 @@
 			// Actually do the work
 			$stmt->execute();
 			if($numVotesLeft<1){
-
-
+				//user is out of votes, check if they are the owner
 				$sql="SELECT owner FROM fruips WHERE gName=:gName";
-                                $stmt=$myPDO->prepare($sql);
-                                $stmt->bindValue(':gName', $gName);
-                                $stmt->execute();
-                                $checkOwn=$stmt->fetch();
-                                if($checkOwn['owner']==$useName){
+                		$stmt=$myPDO->prepare($sql);
+                		$stmt->bindValue(':gName', $gName);
+                		$stmt->execute();
+                		$checkOwn=$stmt->fetch();
+                		if($checkOwn['owner']==$useName){
 
-                                        $sql="Update fruips set voting=False where gName=:gName";
-                                        $stmt=$myPDO->prepare($sql);
-                                        $stmt->bindValue(':gName', $gName);
-                                        $stmt->execute();
+					//user is owner, end voting
+					$sql="Update fruips set voting=False where gName=:gName";
+					$stmt=$myPDO->prepare($sql);
+					$stmt->bindValue(':gName', $gName);
+					$stmt->execute();
 
-                                        $sql="SELECT array_to_json(votes) as votes from membership where gname=:gname and voted=True";
-                                        $stmt=$myPDO->prepare($sql);
-                                        $stmt->bindValue(':gname', $gName);
-                                        $stmt->execute();
-                                        $userVotes=$stmt->fetchAll();
-                                        $countVotes=0;
-                                        $tallyArr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-                                        foreach($userVotes as $aUser){
-                                                $finishedVotes = rtrim($aUser['votes']);
-                                                $finishedVotes=json_decode($finishedVotes, true);
-                                                $convertedArray = array();
-                                                // for each location convert boolean to integer and add to array
-                                                foreach($finishedVotes as $places) {
-                                                        array_push($convertedArray, (int)$places);
-                                                } // end foreach
-                                                while($countVotes<count($convertedArray)){
+					//get all members vote arrays
+					$sql="SELECT array_to_json(votes) as votes from membership where gname=:gname and voted=True";
+					$stmt=$myPDO->prepare($sql);
+					$stmt->bindValue(':gname', $gName);
+					$stmt->execute();
+					$userVotes=$stmt->fetchAll();
+					$countVotes=0;
+					$tallyArr=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-                                                        $tallyArr[$countVotes]+=$convertedArray[$countVotes];
-                                                        $countVotes++;
-                                                }
-                                                $countVotes=0;
-                                        }
-                                        $maxVote=max($tallyArr);
-                                        $maxIndex=array_search($maxVote, $tallyArr);
+					foreach($userVotes as $aUser){
+						//tally all votes, store in tallyArr
+						$finishedVotes = rtrim($aUser['votes']);
+						$finishedVotes=json_decode($finishedVotes, true);
+						$convertedArray = array();
+						// for each location convert boolean to integer and add to array
+						foreach($finishedVotes as $places) {
+							array_push($convertedArray, (int)$places);
+						}
+						while($countVotes<count($convertedArray)){ // add votes together
+							$tallyArr[$countVotes]+=$convertedArray[$countVotes];
+							$countVotes++;
+						}
+						$countVotes=0;
+					} // end foreach
+					//get restaurant with maximum vote
+					$maxVote=max($tallyArr);
+					$maxIndex=array_search($maxVote, $tallyArr);
 					$maxIndex+=1;
-                                        echo("<script>alert({$maxIndex});</script>");
-                                        $sql="DELETE from places WHERE gname=:gname and name!=(select name from (SELECT name, ROW_NUMBER () OVER (ORDER BY name) as nth from (select name from places where gname=:gname) as names) as allnames where nth={$maxIndex})";
-                                        $stmt=$myPDO->prepare($sql);
-                                        $stmt->bindValue(':gname', $gName);
-                                        $stmt->execute();
-                                }
-
-
-
-			}
+					// delete restauraunts that are not the winner
+					$sql="DELETE from places WHERE gname=:gname and name!=(select name from (SELECT name, ROW_NUMBER () OVER (ORDER BY name) as nth from (select name from places where gname=:gname) as names) as allnames where nth={$maxIndex})";
+					$stmt=$myPDO->prepare($sql);
+					$stmt->bindValue(':gname', $gName);
+					$stmt->execute();
+				} // if owner
+			} // end if votes < 1
 		} // end if not done voting
 		else {
-		echo "<p> YOU HAVE ALREADY VOTED </p>";	
-
-			
-
-		} // end if done voting
+			echo "<p> YOU HAVE ALREADY VOTED </p>";	
+		} 
 	
 //-------------------------Convert JSON Array to PHP Array---------------------------------//
 	function pgArray($arr){

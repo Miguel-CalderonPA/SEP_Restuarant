@@ -5,8 +5,8 @@ session_start(); // start session
 // Setup for XML file
 $context  = stream_context_create(array('http' => array('header' => 'Accept: application/xml')));
 // The places api information
-$url = 'https://maps.googleapis.com/maps/api/place/search/xml?location=42.6641,-73.7857&radius=500&sensor=false&key={API-KEY}&types=restaurant';
-$url = 'https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+12205+&radius=5&key={API-KEY}&types=restaurant';
+$url = 'https://maps.googleapis.com/maps/api/place/search/xml?location=42.6641,-73.7857&radius=500&sensor=false&key=GOOGLE_API_KEY&types=restaurant';
+$url = 'https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurants+12205+&radius=5&key=GOOGLE_API_KEY&types=restaurant';
 // Grab the contents of the file, with no base path and using prebuilt context resource
 $xmlData = file_get_contents($url, false, $context);
 // grab the XML data
@@ -26,7 +26,7 @@ foreach($xmlObject->result as $location) {
 	$locationsAttr["name"] = (string)$location->name;
 	$locationsAttr["address"] = (string)$location->formatted_address;
 	$locationsAttr["rating"] = (string)$location->rating;
-	$locationsAttr["photo_reference"] = (string)$baseUrl . (string)$location->photo->photo_reference . "&key={API-KEY}";
+	$locationsAttr["photo_reference"] = (string)$baseUrl . (string)$location->photo->photo_reference . "&key=GOOGLE_API_KEY";
 	// Testing Code - to be deleted later
 	echo "<p>The location's name is: " . $locationsAttr['name'] . "</p>";
 	echo "<p>The address is: " . $locationsAttr['address'] . "</p>";
@@ -47,7 +47,7 @@ var_dump($_SESSION['locations']);
 
 // GET IMAGE https://maps.googleleap
 /*
-$uRL = "https://maps.googleapis.com/maps/api/place/search/xml?location=42.6641,-73.7857&radius=500&sensor=false&key={API-KEY}&types=restaurant";
+$uRL = "https://maps.googleapis.com/maps/api/place/search/xml?location=42.6641,-73.7857&radius=500&sensor=false&key=GOOGLE_API_KEY&types=restaurant';
 //var_dump($uRL);
 $xML= file_get_contents($uRL) or die("Failed to Load");
 //var_dump($xML);
@@ -62,7 +62,7 @@ foreach($parser->PlaceSearchResponse->result as $result) { };
 
 // name, address, rating, price level
 /*
-$url = 'https://maps.googleapis.com/maps/api/place/search/xml?location=42.6641,-73.7857&radius=500&sensor=false&key={API-KEY}&types=restaurant';
+$url = 'https://maps.googleapis.com/maps/api/place/search/xml?location=42.6641,-73.7857&radius=500&sensor=false&key=GOOGLE_API_KEY&types=restaurant';
 $xmlData = file_get_contents($url);
 $xmlObject = simplexml_load_string($xmlData) or die("SimpleXML fails, isn't defined");// HOW IS THIS DISABLED
 //echo $json;

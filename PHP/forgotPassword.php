@@ -28,23 +28,22 @@
     \PDO::ATTR_EMULATE_PREPARES   => false,
 ];
 		
-		try {
-			$pdo = new PDO('pgsql:host=localhost;dbname=postgres','danserver','AlphaSQ#1', $options);	
-		if($pdo) {
+		try { // try to connect
+			$myPDO = new PDO('pgsql:host=localhost;dbname=DB_NAME','user','pass', $options);
+		if($pdo) { // if failed
 			echo "Connected Successfully\n";
 			$SELECT=$pdo->query("SELECT email FROM users WHERE email='{$email}'")->fetch();
 			
-			if($SELECT != false) {
+			if($SELECT != false) { // if nothing in select
 				echo "An email was sent if there is an associated account";
 				$link = $email . " A link allowing them to access update page";
 				mail($ourEmail, "Reset Password" , $link, $headers);
-				file_put_contents($file, $link.PHP_EOL, FILE_APPEND | LOCK_EX);
-				
+				file_put_contents($file, $link.PHP_EOL, FILE_APPEND | LOCK_EX); // write to file
 			}
-			else {
+			else { // if fail let user know
 				echo "An email was sent if there is an associated account";
 			}
-			echo "<script>alert('An email was sent if there is an associated account');</script>";
+			echo "<script>alert('An email was sent if there is an associated account');</script>"; 
 		}
 		}catch(PDOException $e) {
 			echo "";
