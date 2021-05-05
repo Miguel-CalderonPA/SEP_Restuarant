@@ -7,13 +7,13 @@
 		$fruipNum = $_POST["fruipNum"];
 		$gName = $userFruips[$fruipNum];
 		$confirmation = $_POST["confirmDel"];
-		//echo("<script>alert($confirmation);</script>"); // testing to be deleted
+
 		// If user doens't cancel deletion process
 		if ($confirmation==1) {
 			$options = [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,\PDO::ATTR_EMULATE_PREPARES => false,];
 			try{
 				//create PDO object (connect to server)
-				$myPDO = new PDO('pgsql:host=localhost;dbname=postgres','danserver','AlphaSQ#1', $options);
+				$myPDO = new PDO('pgsql:host=localhost;dbname=DB_NAME','user','pass', $options);
 			} // end try
 			catch(PDOException $e){ // error
 				//check for connection errors
@@ -27,7 +27,7 @@
 			// Try to perform select 
 			try{
 				 $fruips=$stmt->execute();
-				 echo "execution " . $fruips . " line";
+				// echo "execution " . $fruips . " line";
 			} // end try
 			catch(PDOException $e){ // if failed
 				echo $e->getMessage();

@@ -21,17 +21,34 @@
 			$.post("../../PHP/acceptadd.php", {gName:$(this).val()}); // send group name data to acceptadd
 				$.post("../../PHP/loadfruips.php", function(result){ // send post data to load fruips
 					$("#fruipTable").html(result); // update table on current page
-                    }); // end post data    
-        }); // end document
+                    }); // end post data
+		}); // end document
+
 		$(document).on("click", ".disJoin",function(){ // when disJoin is clicked
 			$.post("../../PHP/rejectadd.php", {gName:$(this).val()}); // send group name to rejectAdd
 				$.post("../../PHP/loadfruips.php", function(result){ // send data to load fruip
 					$("#fruipTable").html(result);
-                }); // end post data
-        }); // end document
+                	}); // end post data
+		}); // end document	
+		 $(document).on("click", ".leave",function(){ // when disJoin is clicked
+                        $.post("../../PHP/leave.php", {fruipNum:$(this).val()}); // send group name to rejectAdd
+                                $.post("../../PHP/loadfruips.php", function(result){ // send data to load fruip
+                                        $("#fruipTable").html(result);
+        	        }); // end post data
+	
+        	}); // end document
 		function manageFunction(num){
 			location.href="fruipManagement.html?var="+num;	// send to manage page with fruip number
 		} // end manageFunction
+
+		function voteFunction(num){
+
+			location.href="swipe.html?var="+num;
+		}
+		function resultsFunction(num){
+
+			location.href="results.html?var="+num;
+		}
 	</script>
 
 	<style>

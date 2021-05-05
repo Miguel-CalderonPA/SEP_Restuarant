@@ -14,28 +14,29 @@
 	var num=getVal();
         
 	$(document).ready(function(){
-                $(window).load(function() { // what to load when window starts
-		
 			$.post("../../PHP/swapLocations.php",{fruipNum:num}, function(result){
                                 $("#res").html(result);});
-		});
-		$("#noBtn").on("click", function(){
-						$.post("../../PHP/orgVotes.php",{fruipNum:num, vote:$(this).val()}, function(result){
-                                $("#popup").html(result);});
-                        $.post("../../PHP/swapLocations.php",{fruipNum:num, vote:$(this).val()}, function(result){
-                                $("#res").html(result);});});
-		$("#yesBtn").on("click", function(){
-						$.post("../../PHP/orgVotes.php",{fruipNum:num, vote:$(this).val()}, function(result){
-                                $("#popup").html(result);});
-                        $.post("../../PHP/swapLocations.php",{fruipNum:num, vote:$(this).val()}, function(result){
-                                $("#res").html(result);});});
+			
+		
+                //$(window).load(function() { // what to load when window starts
+		
+		//	$.post("../../PHP/swapLocations.php",{fruipNum:num}, function(result){
+                //                $("#res").html(result);});
+		//});
 
-                
-
+		$("#noBtn").on("click", function(){ // First sends YES vote to orgVotes to store and count vote number
+						$.post("../../PHP/orgVotes.php",{fruipNum:num, vote:$(this).val()}, function(result){
+                                $("#popup").html(result);}); // Shows next restuarant 
+                        $.post("../../PHP/swapLocations.php",{fruipNum:num, vote:$(this).val()}, function(result){
+                                $("#res").html(result);});}); // returns next restuarant 
+		$("#yesBtn").on("click", function(){ // First sends YES vote to orgVotes to store and count vote number
+						$.post("../../PHP/orgVotes.php",{fruipNum:num, vote:$(this).val()}, function(result){
+                                $("#popup").html(result);});// Shows next restuarant 
+                        $.post("../../PHP/swapLocations.php",{fruipNum:num, vote:$(this).val()}, function(result){
+                                $("#res").html(result);});});// returns next restuarant
         });
 
-
-		function getVal(){
+		function getVal(){ 
                 // get data from page
                 url=window.location.href;
                 // ability to grab data
@@ -47,7 +48,7 @@
 
 
 	<script>
-		// 
+		// Function that may have been used in a mobile version
 		function allowDrop(ev) {
 		  ev.preventDefault();
 		}
@@ -68,7 +69,7 @@
 
 	</style>
 	<body>
-		<h1>Swipe or Click For Your Favorite Resturants!</h1>
+		<h1>Click For Your Favorite Resturants!</h1>
 		<div class="popup" id="popup"></div>
 		<div class="container">
         <div class="content">

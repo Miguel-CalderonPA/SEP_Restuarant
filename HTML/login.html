@@ -5,6 +5,7 @@
 		<script src="jquery-1.11.1.js"></script>
 		<script>
         $(document).ready(function(){ // when document loads
+			$.post("../PHP/logout.php");
 			$("#login").on("click",function() { // when login is clicked
 				$.post("../PHP/login.php", {useName:$("#useName").val(),pwd:$("#pwd").val()}, // send user data to php
 				function(result){ $("#popup").html(result); // shows results from php

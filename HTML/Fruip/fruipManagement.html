@@ -24,8 +24,16 @@ var confirmDel=0;
 		// add button hit
 		$("#addBtn").on("click", function(){ 
 			$.post("../../PHP/addmember.php",{fruipNum:num, useName:$("#addMem").val()}, function(result){
-				$("#popup").html(result);
-		});}); // end add button
+				$("#popup").html(result);});
+			$.post("../../PHP/loadmembers.php",{fruipNum:num}, function(result){
+                                $("#membersTable").html(result);
+                        }); // end loadmembers
+                        // function to merge tables
+                        $.post("../../PHP/loadjoins.php",{fruipNum:num}, function(result){
+                                $("#joinTable").html(result);
+                        });
+			
+		}); // end add button
 
 		// delete button
 		$("#delFBtn").on("click", function(){
@@ -34,8 +42,7 @@ var confirmDel=0;
 		});}); // end delete button
 		
 		$("#voteBtn").on("click", function(){
-                        //$.post("../../PHP/startvote.php",{fruipNum:num, zip:$("#zip").val()}, function(result){
-                        //        $("#popup").html(result);
+                       
 			$.post("../../PHP/loadLocations.php",{fruipNum:num, zip:$("#zip").val()}, function(result){
 				$("#popup").html(result);
 			

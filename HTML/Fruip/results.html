@@ -16,7 +16,7 @@
         
 	$(document).ready(function(){
 		$(window).load(function() { // what to load when window starts
-		
+
 			$.post("../../PHP/getResult.php",{fruipNum:num}, function(result){
                                $("#res").html(result);});
 		});
@@ -35,20 +35,20 @@
 
 
 	<script>
-		// 
+		// Function that may have been used in a mobile version
 		function allowDrop(ev) {
 		  ev.preventDefault();
-		}
+		} // end drop
 		// dragging images
 		function drag(ev) {
 		  ev.dataTransfer.setData("text", ev.target.id);
-		}
+		} // end drag
 		
 		function drop(ev) {
 		  ev.preventDefault();
 		  var data = ev.dataTransfer.getData("text");
 		  ev.target.appendChild(document.getElementById(data));
-		}
+		} // end drop
 
 	</script>
 	<style>

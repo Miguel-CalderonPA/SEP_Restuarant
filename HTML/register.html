@@ -7,7 +7,7 @@
 			$(document).ready(function(){ // when document loads
 				$("#submit").on("click",function() { // when submittion is clicked
 					$.post("../PHP/register.php", {useName:$("#useName").val(),fName:$("#fName").val(),
-					lName:$("#lName").val(),email:$("#email").val(),pwd:$("#pwd").val()}, // send user data to register
+					lName:$("#lName").val(),email:$("#email").val(),pwd:$("#pwd").val(), rPwd:$("#pwd-repeat").val()}, // send user data to register
 					function(result){ $("#popup").html(result); // return results back
 					}); // end post data
 				}); // end click submit
@@ -36,10 +36,10 @@
     <input type="password" id="pwd" placeholder="Enter Password" name="pwd" required></div>
 
     <div class = "lbls"><label for="psw-repeat"><b>Re-type Password</b></label>
-    <input type="password" placeholder="Retype Password" name="psw-repeat" required></div>
+    <input type="password" id="pwd-repeat"  placeholder="Retype Password" name="pwd-repeat" required></div>
     <button type="button" id="submit" name="submit" class="registerbtn">Register</button>
 </form>
-<br><a href="http://ec2-52-14-132-218.us-east-2.compute.amazonaws.com/efs-mount-point/sampledir/HTML/login.html"> Back to Login </a>
+<br><a href="login.html"> Back to Login </a>
 </body>
 </html>
 </html>

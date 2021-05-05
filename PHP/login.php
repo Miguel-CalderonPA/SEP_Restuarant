@@ -1,45 +1,45 @@
 <?php
-
-                //error_reporting(-1);
-                //ini_set("display error",1);
-                $pwd=$_POST['pwd'];
-                $useName=$_POST['useName'];
-                $options = [
-    \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
-    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-    \PDO::ATTR_EMULATE_PREPARES   => false,
-];
-                try{
-                        //$con= pg_connect("host=localhost dbname=postgres user=postgres password=");
-                        $myPDO = new PDO('pgsql:host=localhost;dbname=postgres','danserver','AlphaSQ#1', $options);
-                }
-                catch(PDOException $e){
-                print"Error!: ".$e->getMessage()."<br/>";
-                die();
-                }
-                $pass=$myPDO->query("SELECT salt,hash FROM users WHERE usename='{$useName}'")->fetch();
-                if(empty($pass['salt']))
-                {
-
-
-                }
-
-                $hashedPass=crypt($pwd, $pass['salt']);
-               // $pass= $myPDO->query("SELECT case when (SELECT hash from users where usename='{$useName}')='{$hash$
-                if($pass['hash']==$hashedPass){
-                        echo "<script>alert('login successful');</script>";
-                        //header("Location: ../HTML/Fruip/FruipDashboard.html");
-                        session_start();
-			$_SESSION['useName']=$useName;
-			$_SESSION['created']=time();
-			$_SESSION['refresh']=time();
-			echo ("<script>location.href='../HTML/Fruip/FruipDashboard.html';</script>");
-                }
-                else
-                {
-                        echo "<script>alert('login failed: username or password is invalid');</script>";
-                }
-
+	//Author:Dan Klein
+	//Purpose: logs the user into the website
+	//error_reporting(-1);
+   	//ini_set("display error",1);
+	
+	// Grab data and setup PDO
+	$pwd=$_POST['pwd'];
+    	$useName=$_POST['useName'];
+    	$options = [ \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION, \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC, \PDO::ATTR_EMULATE_PREPARES   => false, ];
+    	try{
+        	$myPDO = new PDO('pgsql:host=localhost;dbname=DB_NAME','user','pass', $options);
+	}
+    	catch(PDOException $e){
+		print"Error!: ".$e->getMessage()."<br/>";
+        	die();
+    	}
+	//get salt and hash for user
+	$sql="SELECT salt,hash,usename FROM users WHERE usename=:useName";
+	$stmt=$myPDO->prepare($sql);
+    	$stmt->bindValue(':useName',$useName);
+	try{
+		$stmt->execute();
+	}
+	catch(PDOException $e){
+		"<script>alert('login failed: username or password is invalid');</script>";
+	}
+	$pass=$stmt->fetch();
+	$hashedPass=crypt($pwd, $pass['salt']);
+    	if($pass['hash']==$hashedPass){ //salted and hashed pass matches hashed password
+		echo "<script>alert('login successful');</script>";
+		//create session variables for user
+		session_start();
+		$_SESSION['useName']=$useName;
+		$_SESSION['created']=time();
+		$_SESSION['refresh']=time();
+		echo ("<script>location.href='../HTML/Fruip/FruipDashboard.html';</script>");
+    	} // end if hashedPass
+    	else {
+		//no user was found with this username or password was wrong
+        	echo "<script>alert('login failed: username or password is invalid');</script>";
+    	}
 ?>
 
 

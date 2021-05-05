@@ -154,3 +154,27 @@ ID: Help Ticket #04272021223046
  Email: testing123@gmail.com
  Problem: testing :)
 
+-----------------------------------------------------------
+ID: Help Ticket #05022021132909
+ Name: Miguel
+ Email: test
+ Problem: Message
+
+-----------------------------------------------------------
+ID: Help Ticket #05022021220625
+ Name: Hamburglar
+ Email: hamburglar@mcdonalds.com
+ Problem: I need help logging in!
+
+-----------------------------------------------------------
+ID: Help Ticket #05022021221055
+ Name: Hamburglar
+ Email: ChomperITHelp@gmail.com
+ Problem: I can't log in!!
+
+-----------------------------------------------------------
+ID: Help Ticket #05022021222156
+ Name: Hamburglar
+ Email: hamburglar@mcdonalds.com
+ Problem: I can't log in!!!!
+
