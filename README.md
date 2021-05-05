@@ -5,7 +5,7 @@ Admin/User/Developer Documentation						          Professor Cornell
 
 ---------------------------------------------------------------------------------------------------
 
-Admin Documentation                                                .
+Admin Documentation
 For Access to server (needed for both maintenance and installation)
 Must have a valid AWS key downloaded for you to login (usually .pem file)
 Server must have a record of your login credentials within your user’s home. In the .ssh folder, in the authorized_key file . Should start with ssh -rsa and end with a key name.
@@ -33,7 +33,7 @@ If necessary you can check your billings on the same page below the “Requests 
 
 ---------------------------------------------------------------------------------------------------
 
-User Documentation                                                    .
+User Documentation
 
 USER REGISTRATION
 First go the login page @ http://ec2-52-14-132-218.us-east-2.compute.amazonaws.com/efs-mount-point/sampledir/HTML/login.html
